@@ -81,7 +81,7 @@ public class MainController {
         return null;
     }
 
-    @RequestMapping("addGoldbug") //@RequestBody BugInfo bugInfo, @RequestBody Content content
+    @RequestMapping("addGoldBug") //@RequestBody BugInfo bugInfo, @RequestBody Content content
     public @ResponseBody Result addNewGoldbug(@RequestBody BugContent bugContent){
         BugInfo bugInfo = bugContent.getBugInfo();
         bupt.ugrd.pojo.Content content = bugContent.getContent();
