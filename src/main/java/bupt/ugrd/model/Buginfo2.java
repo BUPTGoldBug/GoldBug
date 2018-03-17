@@ -1,11 +1,11 @@
-/*package bupt.ugrd.pojo;
+package bupt.ugrd.model;
 
 import javax.persistence.*;
 
 /**
  * Created by Luyao on 2018/1/21.
  */
-/*
+
 @Entity
 public class Buginfo2 {
     @Id
@@ -13,8 +13,7 @@ public class Buginfo2 {
     private Integer id;
 
     @OneToOne
-    @JoinColumn(name = "id")
-    private Integer bugId;
+    private Buginfo bugId;
 
     private Integer status;
 
@@ -22,7 +21,9 @@ public class Buginfo2 {
 
     private double lat;
 
-    private double TTL;
+    private int lifecount;
+
+    //private double TTL;
 
     public Integer getId() {
         return id;
@@ -32,11 +33,11 @@ public class Buginfo2 {
         this.id = id;
     }
 
-    public Integer getBugId() {
+    public Buginfo getBugId() {
         return bugId;
     }
 
-    public void setBugId(Integer bugId) {
+    public void setBugId(Buginfo bugId) {
         this.bugId = bugId;
     }
 
@@ -64,11 +65,20 @@ public class Buginfo2 {
         this.lat = lat;
     }
 
+    public void setLifecount(int lifecount) {
+        this.lifecount = lifecount;
+    }
+
+    public int getLifecount() {
+        return lifecount;
+    }
+
+    /*
     public double getTTL() {
         return TTL;
     }
 
     public void setTTL(double TTL) {
         this.TTL = TTL;
-    }
-}*/
+    }*/
+}

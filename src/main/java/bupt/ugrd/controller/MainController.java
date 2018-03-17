@@ -35,6 +35,9 @@ public class MainController {
     @Autowired
     private BuginfoRepository buginfoRepository;
 
+    @Autowired
+    private Buginfo2Repository buginfo2Repository;
+
     @RequestMapping("addUser")
     public @ResponseBody Result addNewUser(@RequestBody User user){
         Userinfo n = new Userinfo(user.getUserPhone(), user.getUserName());
@@ -83,7 +86,6 @@ public class MainController {
 
     @RequestMapping("addGoldBug") //@RequestBody BugInfo bugInfo, @RequestBody Content content
     public @ResponseBody Result addNewGoldbug(@RequestBody BugContent bugContent){
-        BugInfo bugInfo = bugContent.getBugInfo();
         bupt.ugrd.pojo.Content content = bugContent.getContent();
 
         bupt.ugrd.model.Content cont = new bupt.ugrd.model.Content();
@@ -95,9 +97,11 @@ public class MainController {
         cont.setAns_3(content.getAns_3());
         cont.setAns_4(content.getAns_4());
         cont.setContentType(content.getContentType());
-        //  cont.setKey(cont.getKey());
+        cont.setKey_(content.getKey_());
         contentRepository.save(cont);
 
+
+        BugInfo bugInfo = bugContent.getBugInfo();
         Buginfo bug = new Buginfo();
         String userName = bugInfo.getPlanter();
         Userinfo user = this.findUserByName(userName);
@@ -132,6 +136,18 @@ public class MainController {
            // bug.setBrithTime(bugInfo.getBirthTime());
            // bug.setDeathTime(bugInfo.getDeathTime());
             buginfoRepository.save(bug);
+
+
+            Buginfo2 buginfo2 = new Buginfo2();
+            buginfo2.setBugId(bug);
+            buginfo2.setStatus(0);//0 可捉可现 1 可捉不现 2 不能捉
+            buginfo2.setLon(bugInfo.getLon());
+            buginfo2.setLat(bugInfo.getLat());
+            buginfo2.setLifecount(bugInfo.getLifecount());
+            buginfo2Repository.save(buginfo2);
+
+            System.out.println("This New BUG is Connecting with  Bug "+buginfo2.getBugId().getId()+"in the Table BugInfo~~~~~~~~~`");
+
             return new Result(true, "success", 0);
         }
         return new Result(false, "failure", 1);

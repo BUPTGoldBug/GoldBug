@@ -9,6 +9,7 @@ import java.io.Serializable;
 public class BugInfo implements Serializable{
     private double lon;
     private double lat;
+    private Integer lifecount;
     private String planter;
     private Integer timeIndex;
     private double timeP_1;
@@ -23,9 +24,10 @@ public class BugInfo implements Serializable{
 
     public BugInfo(){}
 
-    public BugInfo( double lon, double lat, String planter, Integer timeIndex, double timeP_1,double timeP_2,Integer posIndex, double posP_1,double posP_2, double posP_3){
+    public BugInfo( double lon, double lat, Integer lifecount, String planter, Integer timeIndex, double timeP_1,double timeP_2,Integer posIndex, double posP_1,double posP_2, double posP_3){
         this.lon = lon;
         this.lat = lat;
+        this.lifecount = lifecount;
         this.planter = planter;
         this.timeIndex = timeIndex;
         this.timeP_1 = timeP_1;
@@ -50,6 +52,14 @@ public class BugInfo implements Serializable{
 
     public double getLat() {
         return lat;
+    }
+
+    public void setLifecount(Integer lifecount) {
+        this.lifecount = lifecount;
+    }
+
+    public Integer getLifecount() {
+        return lifecount;
     }
 
     public void setPlanter(String planter) {

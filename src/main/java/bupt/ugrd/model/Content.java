@@ -21,7 +21,7 @@ public class Content {
     private String ans_2;
     private String ans_3;
     private String ans_4;
-  //  private Byte key;
+    private String key_;
 
     public void setId(Integer id) {
         this.id = id;
@@ -94,12 +94,12 @@ public class Content {
     public void setAns_4(String ans_4) {
         this.ans_4 = ans_4;
     }
-/*
-    public Byte getKey() {
-        return key;
+
+    public String getKey_() {
+        return key_;
     }
 
-    public void setKey(Byte key) {
-        this.key = key;
-    }*/
+    public void setKey_(String key_) {
+        this.key_ = key_;
+    }
 }

@@ -14,11 +14,11 @@ public class Content implements Serializable{
     private String ans_3;
     private String ans_4;
     private Integer contentType;
-   // private Byte key;
+    private String key_;
 
     public Content(){}
 
-    public Content(String des, String question, double score, String ans_1, String ans_2, String ans_3, String ans_4, Integer contentType){
+    public Content(String des, String question, double score, String ans_1, String ans_2, String ans_3, String ans_4, Integer contentType, String key_){
         this.description = des;
         this.question = question;
         this.score = score;
@@ -27,6 +27,7 @@ public class Content implements Serializable{
         this.ans_3 = ans_3;
         this.ans_4 = ans_4;
         this.contentType = contentType;
+        this.key_ = key_;
     }
 
     public String getDescription() {
@@ -84,14 +85,14 @@ public class Content implements Serializable{
     public void setAns_4(String ans_4) {
         this.ans_4 = ans_4;
     }
-/*
-    public Byte getKey() {
-        return key;
+
+    public String getKey_() {
+        return key_;
     }
 
-    public void setKey(Byte key) {
-        this.key = key;
-    }*/
+    public void setKey_(String key_) {
+        this.key_ = key_;
+    }
 
     public void setContentType(Integer contentType) {
         this.contentType = contentType;
