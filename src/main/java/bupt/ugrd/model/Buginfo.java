@@ -1,13 +1,8 @@
 package bupt.ugrd.model;
 
-import bupt.ugrd.model.Content;
-import bupt.ugrd.model.Poschange;
-import bupt.ugrd.model.Timechange;
-import bupt.ugrd.model.Userinfo;
-
 import javax.persistence.*;
-import javax.xml.crypto.Data;
-import java.util.Date;
+import java.sql.Timestamp;
+
 
 /**
  * Created by Luyao on 2018/1/21.
@@ -19,37 +14,20 @@ public class Buginfo {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @ManyToOne(targetEntity = Userinfo.class)
-    @JoinColumn(name = "userId", referencedColumnName = "id")
-    private Userinfo userinfo;
+    private Timestamp deathTime;
+    private Timestamp startTime;
 
+    private double start_lat;
+    private double start_lon;
+    private double end_lat;
+    private double end_lon;
+
+    private boolean ifNeedStartTime;
+    private boolean isMoved;
+
+    private Integer lifecount;
     private String planter;
 
-    @ManyToOne(targetEntity = Timechange.class)
-    @JoinColumn(name = "timeIndex", referencedColumnName = "id")
-    private Timechange timechange;
-
-    private double timeP_1;
-
-    private double timeP_2;
-
-    @ManyToOne(targetEntity = Poschange.class)
-    @JoinColumn(name = "posIndex", referencedColumnName = "id")
-    private Poschange poschange;
-
-    private double posP_1;
-
-    private double posP_2;
-
-    private double posP_3;
-
-    @ManyToOne(targetEntity = Content.class)
-    @JoinColumn(name = "contentIndex", referencedColumnName = "id")
-    private Content content;
-
- //   private Date birthTime;
-
- //   private Data deathTime;
 
     public Integer getId() {
         return id;
@@ -59,99 +37,83 @@ public class Buginfo {
         this.id = id;
     }
 
-    public Userinfo getUserinfo() {
-        return userinfo;
+    public void setDeathTime(Timestamp deathTime) {
+        this.deathTime = deathTime;
     }
 
-    public void setUserinfo(Userinfo userinfo) {
-        this.userinfo = userinfo;
+    public Timestamp getDeathTime() {
+        return deathTime;
     }
 
-    public String getPlanter() {
-        return planter;
+    public void setStartTime(Timestamp startTime) {
+        this.startTime = startTime;
+    }
+
+    public Timestamp getStartTime() {
+        return startTime;
+    }
+
+    public void setStart_lat(double start_lat) {
+        this.start_lat = start_lat;
+    }
+
+    public double getStart_lat() {
+        return start_lat;
+    }
+
+    public void setStart_lon(double start_lon) {
+        this.start_lon = start_lon;
+    }
+
+    public double getStart_lon() {
+        return start_lon;
+    }
+
+    public void setEnd_lat(double end_lat) {
+        this.end_lat = end_lat;
+    }
+
+    public double getEnd_lat() {
+        return end_lat;
+    }
+
+    public void setEnd_lon(double end_lon) {
+        this.end_lon = end_lon;
+    }
+
+    public double getEnd_lon() {
+        return end_lon;
+    }
+
+    public void setIfNeedStartTime(boolean ifNeedStartTime) {
+        this.ifNeedStartTime = ifNeedStartTime;
+    }
+
+    public boolean isIfNeedStartTime() {
+        return ifNeedStartTime;
+    }
+
+    public void setIsMoved(boolean isMoved) {
+        this.isMoved = isMoved;
+    }
+
+    public boolean isMoved() {
+        return isMoved;
+    }
+
+    public void setLifecount(Integer lifecount) {
+        this.lifecount = lifecount;
+    }
+
+    public Integer getLifecount() {
+        return lifecount;
     }
 
     public void setPlanter(String planter) {
         this.planter = planter;
     }
 
-    public Timechange getTimechange() {
-        return timechange;
+    public String getPlanter() {
+        return planter;
     }
-
-    public void setTimechange(Timechange timechange) {
-        this.timechange = timechange;
-    }
-
-    public void setTimeP_1(double timeP_1) {
-        this.timeP_1 = timeP_1;
-    }
-
-    public double getTimeP_1() {
-        return timeP_1;
-    }
-
-    public void setTimeP_2(double timeP_2) {
-        this.timeP_2 = timeP_2;
-    }
-
-    public double getTimeP_2() {
-        return timeP_2;
-    }
-
-    public Poschange getPoschange() {
-        return poschange;
-    }
-
-    public void setPoschange(Poschange poschange) {
-        this.poschange = poschange;
-    }
-
-    public void setPosP_1(double posP_1) {
-        this.posP_1 = posP_1;
-    }
-
-    public double getPosP_1() {
-        return posP_1;
-    }
-
-    public void setPosP_2(double posP_2) {
-        this.posP_2 = posP_2;
-    }
-
-    public double getPosP_2() {
-        return posP_2;
-    }
-
-    public void setPosP_3(double posP_3) {
-        this.posP_3 = posP_3;
-    }
-
-    public double getPosP_3() {
-        return posP_3;
-    }
-
-    public Content getContent() {
-        return content;
-    }
-
-    public void setContent(Content content) {
-        this.content = content;
-    }
-/*
-    public Date getBirthTime() {
-        return birthTime;
-    }
-
-    public void setBirthTime(Date birthTime) {
-        this.birthTime = birthTime;
-    }
-
-    public Data getDeathTime() {
-        return deathTime;
-    }
-
-    public void setDeathTime(Data deathTime) {
-        this.deathTime = deathTime;
-    }*/
 }

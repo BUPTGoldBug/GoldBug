@@ -4,15 +4,10 @@ package bupt.ugrd.controller;
  * Created by Luyao on 2018/1/20.
  */
 
-//import bupt.ugrd.model.Buginfo;
-//import bupt.ugrd.model.BuginfoRepository;
 import bupt.ugrd.model.*;
 import bupt.ugrd.pojo.*;
-import javafx.geometry.Pos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.sql.Time;
 import java.util.Iterator;
 
 
@@ -27,12 +22,6 @@ public class MainController {
     private ContentRepository contentRepository;
 
     @Autowired
-    private TimechangeRepository timechangeRepository;
-
-    @Autowired
-    private PoschangeRepository poschangeRepository;
-
-    @Autowired
     private BuginfoRepository buginfoRepository;
 
     @Autowired
@@ -40,8 +29,14 @@ public class MainController {
 
     @RequestMapping("addUser")
     public @ResponseBody Result addNewUser(@RequestBody User user){
-        Userinfo n = new Userinfo(user.getUserPhone(), user.getUserName());
+        Userinfo n = new Userinfo(user.getUserPhone(), user.getUserName(), user.getCreateTime());
         userinfoRepository.save(n);
+        Iterable<Userinfo> list = userinfoRepository.findAll();
+        for(Userinfo a:list){
+            if(a.getUserName().equals("luy")){
+                System.out.println(a.getCreateTime());
+            }
+        }
         return new Result(true, "success", 0);
     }
 
@@ -58,6 +53,59 @@ public class MainController {
         return null;
     }
 
+
+
+    @RequestMapping("addGoldBug") //@RequestBody BugInfo bugInfo, @RequestBody Content content
+    public @ResponseBody Result addNewGoldbug(@RequestBody BugContent bugContent){
+
+        BugInfo bugInfo = bugContent.getBugInfo();
+
+        Buginfo bug = new Buginfo();
+        bug.setDeathTime(bugInfo.getDeathTime());
+        bug.setStartTime(bugInfo.getStartTime());
+        bug.setStart_lat(bugInfo.getStart_lat());
+        bug.setStart_lon(bugInfo.getStart_lon());
+        bug.setEnd_lat(bugInfo.getEnd_lat());
+        bug.setEnd_lon(bugInfo.getEnd_lon());
+        bug.setIfNeedStartTime(bugInfo.isIfNeedStartTime());
+        bug.setIsMoved(bugInfo.isMoved());
+        bug.setLifecount(bugInfo.getLifecount());
+        bug.setPlanter(bugInfo.getPlanter());
+        buginfoRepository.save(bug);
+
+
+        /*
+            Buginfo2 buginfo2 = new Buginfo2();
+            buginfo2.setBugId(bug);
+            buginfo2.setStatus(0);//0 可捉可现 1 可捉不现 2 不能捉
+            buginfo2.setLon(bugInfo.getLon());
+            buginfo2.setLat(bugInfo.getLat());
+            buginfo2.setLifecount(bugInfo.getLifecount());
+            buginfo2Repository.save(buginfo2);
+
+            System.out.println("This New BUG is Connecting with  Bug "+buginfo2.getBugId().getId()+"in the Table BugInfo~~~~~~~~~`");
+            */
+
+        bupt.ugrd.pojo.Content content = bugContent.getContent();
+
+        bupt.ugrd.model.Content cont = new bupt.ugrd.model.Content();
+        cont.setBugId(bug.getId());
+        cont.setDescription(content.getDescription());
+        cont.setQuestion(content.getQuestion());
+        cont.setScore(content.getScore());
+        cont.setAns_1(content.getAns_1());
+        cont.setAns_2(content.getAns_2());
+        cont.setAns_3(content.getAns_3());
+        cont.setAns_4(content.getAns_4());
+        cont.setContentType(content.getContentType());
+        cont.setKey_(content.getKey_());
+        contentRepository.save(cont);
+
+        return new Result(true, "sucess", 0);
+
+    }
+
+        /*
     public Timechange findTimeChangeById(Integer id){
         Iterable<Timechange> timechanges = timechangeRepository.findAll();
         Iterator<Timechange> it= timechanges.iterator();
@@ -82,77 +130,7 @@ public class MainController {
             }
         }
         return null;
-    }
-
-    @RequestMapping("addGoldBug") //@RequestBody BugInfo bugInfo, @RequestBody Content content
-    public @ResponseBody Result addNewGoldbug(@RequestBody BugContent bugContent){
-        bupt.ugrd.pojo.Content content = bugContent.getContent();
-
-        bupt.ugrd.model.Content cont = new bupt.ugrd.model.Content();
-        cont.setDescription(content.getDescription());
-        cont.setQuestion(content.getQuestion());
-        cont.setScore(content.getScore());
-        cont.setAns_1(content.getAns_1());
-        cont.setAns_2(content.getAns_2());
-        cont.setAns_3(content.getAns_3());
-        cont.setAns_4(content.getAns_4());
-        cont.setContentType(content.getContentType());
-        cont.setKey_(content.getKey_());
-        contentRepository.save(cont);
-
-
-        BugInfo bugInfo = bugContent.getBugInfo();
-        Buginfo bug = new Buginfo();
-        String userName = bugInfo.getPlanter();
-        Userinfo user = this.findUserByName(userName);
-
-        Timechange timechange = this.findTimeChangeById(bugInfo.getTimeIndex());
-        Poschange poschange = this.findPosChangeById(bugInfo.getPosIndex());
-
-        double p1, p2, p3;
-        if(user!=null && timechange!=null && poschange!=null){
-            bug.setUserinfo(user);
-            bug.setPlanter(userName);
-
-            bug.setTimechange(timechange);
-            p1 = bugInfo.getTimeP_1();
-            p2 = bugInfo.getTimeP_2();
-            if(p1!=-1)
-                bug.setTimeP_1(p1);
-            if (p2!=-1)
-                bug.setTimeP_2(p2);
-
-            bug.setPoschange(poschange);
-            p1 = bugInfo.getPosP_1();
-            p2 = bugInfo.getPosP_2();
-            p3 = bugInfo.getPosP_3();
-            if(p1!=-1)
-                bug.setPosP_1(p1);
-            if (p2!=-1)
-                bug.setPosP_2(p2);
-            if(p3!=-1)
-                bug.setPosP_3(p3);
-            bug.setContent(cont);
-           // bug.setBrithTime(bugInfo.getBirthTime());
-           // bug.setDeathTime(bugInfo.getDeathTime());
-            buginfoRepository.save(bug);
-
-
-            Buginfo2 buginfo2 = new Buginfo2();
-            buginfo2.setBugId(bug);
-            buginfo2.setStatus(0);//0 可捉可现 1 可捉不现 2 不能捉
-            buginfo2.setLon(bugInfo.getLon());
-            buginfo2.setLat(bugInfo.getLat());
-            buginfo2.setLifecount(bugInfo.getLifecount());
-            buginfo2Repository.save(buginfo2);
-
-            System.out.println("This New BUG is Connecting with  Bug "+buginfo2.getBugId().getId()+"in the Table BugInfo~~~~~~~~~`");
-
-            return new Result(true, "success", 0);
-        }
-        return new Result(false, "failure", 1);
-    }
-
+    }*/
 
 
 }

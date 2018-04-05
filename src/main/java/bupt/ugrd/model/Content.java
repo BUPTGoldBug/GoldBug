@@ -13,6 +13,8 @@ public class Content {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+
+    private Integer bugId;
     private Integer contentType;
     private String description;
     private String question;
@@ -29,6 +31,14 @@ public class Content {
 
     public Integer getId() {
         return id;
+    }
+
+    public void setBugId(Integer bugId) {
+        this.bugId = bugId;
+    }
+
+    public Integer getBugId() {
+        return bugId;
     }
 
     public Integer getContentType() {

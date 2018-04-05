@@ -1,6 +1,8 @@
 package bupt.ugrd.model;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * Created by Luyao on 2018/1/21.
@@ -15,11 +17,22 @@ public class Userinfo {
 
     private String userName;
 
+    private Timestamp createTime;
+
     public Userinfo(){}
 
-    public Userinfo(String userPhone, String userName){
+    public Userinfo(String userPhone, String userName, Timestamp createTime){
         this.userPhone = userPhone;
         this.userName = userName;
+        this.createTime = createTime;
+    }
+
+    public void setCreateTime(Timestamp createTime){
+        this.createTime = createTime;
+    }
+
+    public Timestamp getCreateTime() {
+        return createTime;
     }
 
     public Integer getId() {

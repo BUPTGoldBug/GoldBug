@@ -1,6 +1,10 @@
 package bupt.ugrd.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
+import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * Created by Luyao on 2018/1/21.
@@ -8,6 +12,17 @@ import java.io.Serializable;
 public class User implements Serializable{
     private String userPhone;
     private String userName;
+
+    @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
+    private Timestamp createTime;
+
+    public void setCreateTime(Timestamp createTime){
+        this.createTime = createTime;
+    }
+
+    public Timestamp getCreateTime(){
+        return createTime;
+    }
 
     public void setUserPhone(String userPhone) {
         this.userPhone = userPhone;

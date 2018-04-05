@@ -1,57 +1,111 @@
 package bupt.ugrd.pojo;
 
-import javax.xml.crypto.Data;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 /**
  * Created by Luyao on 2018/1/21.
  */
 public class BugInfo implements Serializable{
-    private double lon;
-    private double lat;
+    //
+    @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
+    private Timestamp deathTime;
+
+    //timezone = "GMT+8",
+    @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
+    private Timestamp startTime;
+
+    private double start_lat;
+    private double start_lon;
+    private double end_lat;
+    private double end_lon;
+
+    private boolean ifNeedStartTime;
+    private boolean isMoved;
+
     private Integer lifecount;
     private String planter;
-    private Integer timeIndex;
-    private double timeP_1;
-    private double timeP_2;
-    private Integer posIndex;
-    private double posP_1;
-    private double posP_2;
-    private double posP_3;
 
- //   private Data birthTime;
- //   private Data deathTime;
 
     public BugInfo(){}
 
-    public BugInfo( double lon, double lat, Integer lifecount, String planter, Integer timeIndex, double timeP_1,double timeP_2,Integer posIndex, double posP_1,double posP_2, double posP_3){
-        this.lon = lon;
-        this.lat = lat;
+    public BugInfo(Timestamp deathTime, Timestamp startTime, double start_lat, double start_lon, double end_lat, double end_lon, boolean ifNeedStartTime, boolean isMoved, Integer lifecount, String planter){
+        this.deathTime = deathTime;
+        this.startTime = startTime;
+        this.start_lat = start_lat;
+        this.start_lon = start_lon;
+        this.end_lat = end_lat;
+        this.end_lon = end_lon;
+        this.ifNeedStartTime = ifNeedStartTime;
+        this.isMoved = isMoved;
         this.lifecount = lifecount;
         this.planter = planter;
-        this.timeIndex = timeIndex;
-        this.timeP_1 = timeP_1;
-        this.timeP_2 = timeP_2;
-        this.posIndex = posIndex;
-        this.posP_1 = posP_1;
-        this.posP_2 = posP_2;
-        this.posP_3 = posP_3;
     }
 
-    public void setLon(double lon) {
-        this.lon = lon;
+    public void setDeathTime(Timestamp deathTime) {
+        this.deathTime = deathTime;
     }
 
-    public double getLon() {
-        return lon;
+    public Timestamp getDeathTime() {
+        return deathTime;
     }
 
-    public void setLat(double lat) {
-        this.lat = lat;
+    public void setStartTime(Timestamp startTime) {
+        this.startTime = startTime;
     }
 
-    public double getLat() {
-        return lat;
+    public Timestamp getStartTime() {
+        return startTime;
+    }
+
+    public void setEnd_lat(double end_lat) {
+        this.end_lat = end_lat;
+    }
+
+    public double getEnd_lat() {
+        return end_lat;
+    }
+
+    public void setEnd_lon(double end_lon) {
+        this.end_lon = end_lon;
+    }
+
+    public double getEnd_lon() {
+        return end_lon;
+    }
+
+    public void setStart_lat(double start_lat) {
+        this.start_lat = start_lat;
+    }
+
+    public double getStart_lat() {
+        return start_lat;
+    }
+
+    public void setStart_lon(double start_lon) {
+        this.start_lon = start_lon;
+    }
+
+    public double getStart_lon() {
+        return start_lon;
+    }
+
+    public void setIfNeedStartTime(boolean ifNeedStartTime) {
+        this.ifNeedStartTime = ifNeedStartTime;
+    }
+
+    public boolean isIfNeedStartTime() {
+        return ifNeedStartTime;
+    }
+
+    public void setIsMoved(boolean isMoved) {
+        this.isMoved = isMoved;
+    }
+
+    public boolean isMoved() {
+        return isMoved;
     }
 
     public void setLifecount(Integer lifecount) {
@@ -69,77 +123,4 @@ public class BugInfo implements Serializable{
     public String getPlanter() {
         return planter;
     }
-
-    public void setTimeIndex(Integer timeIndex) {
-        this.timeIndex = timeIndex;
-    }
-
-    public Integer getTimeIndex() {
-        return timeIndex;
-    }
-
-    public void setTimeP_1(double timeP_1) {
-        this.timeP_1 = timeP_1;
-    }
-
-    public double getTimeP_1() {
-        return timeP_1;
-    }
-
-    public void setTimeP_2(double timeP_2) {
-        this.timeP_2 = timeP_2;
-    }
-
-    public double getTimeP_2() {
-        return timeP_2;
-    }
-
-    public void setPosIndex(Integer posIndex) {
-        this.posIndex = posIndex;
-    }
-
-    public Integer getPosIndex() {
-        return posIndex;
-    }
-
-    public void setPosP_1(double posP_1) {
-        this.posP_1 = posP_1;
-    }
-
-    public double getPosP_1() {
-        return posP_1;
-    }
-
-    public void setPosP_2(double posP_2) {
-        this.posP_2 = posP_2;
-    }
-
-    public double getPosP_2() {
-        return posP_2;
-    }
-
-    public void setPosP_3(double posP_3) {
-        this.posP_3 = posP_3;
-    }
-
-    public double getPosP_3() {
-        return posP_3;
-    }
-
-/*
-    public void setBirthTime(Data birthTime) {
-        this.birthTime = birthTime;
-    }
-
-    public Data getBirthTime() {
-        return birthTime;
-    }
-
-    public void setDeathTime(Data deathTime) {
-        this.deathTime = deathTime;
-    }
-
-    public Data getDeathTime() {
-        return deathTime;
-    }*/
 }

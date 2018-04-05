@@ -6,6 +6,7 @@ import java.io.Serializable;
  * Created by Luyao on 2018/1/21.
  */
 public class Content implements Serializable{
+    private Integer bugId;
     private String description;
     private String question;
     private double score;
@@ -18,7 +19,8 @@ public class Content implements Serializable{
 
     public Content(){}
 
-    public Content(String des, String question, double score, String ans_1, String ans_2, String ans_3, String ans_4, Integer contentType, String key_){
+    public Content(Integer bugId, String des, String question, double score, String ans_1, String ans_2, String ans_3, String ans_4, Integer contentType, String key_){
+        this.bugId = bugId;
         this.description = des;
         this.question = question;
         this.score = score;
@@ -28,6 +30,14 @@ public class Content implements Serializable{
         this.ans_4 = ans_4;
         this.contentType = contentType;
         this.key_ = key_;
+    }
+
+    public void setBugId(Integer bugId) {
+        this.bugId = bugId;
+    }
+
+    public Integer getBugId() {
+        return bugId;
     }
 
     public String getDescription() {

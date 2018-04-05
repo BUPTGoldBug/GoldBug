@@ -1,4 +1,4 @@
-package bupt.ugrd.model;
+/*package bupt.ugrd.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,7 +8,7 @@ import javax.persistence.Id;
 /**
  * Created by Luyao on 2018/1/21.
  */
-@Entity
+/*@Entity
 public class Timechange {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,4 +31,4 @@ public class Timechange {
     public void setFx(String fx) {
         this.fx = fx;
     }
-}
+}*/
