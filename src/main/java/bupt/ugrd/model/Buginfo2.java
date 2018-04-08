@@ -15,6 +15,7 @@ public class Buginfo2 {
     @OneToOne
     private Buginfo bugId;
 
+    //status  0可捉   1即将显示(T<startTime)   2不能捉(lifecount == 0 || T>=deathTime)
     private Integer status;
 
     private double lon;

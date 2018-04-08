@@ -74,17 +74,13 @@ public class MainController {
         buginfoRepository.save(bug);
 
 
-        /*
-            Buginfo2 buginfo2 = new Buginfo2();
-            buginfo2.setBugId(bug);
-            buginfo2.setStatus(0);//0 可捉可现 1 可捉不现 2 不能捉
-            buginfo2.setLon(bugInfo.getLon());
-            buginfo2.setLat(bugInfo.getLat());
-            buginfo2.setLifecount(bugInfo.getLifecount());
-            buginfo2Repository.save(buginfo2);
 
-            System.out.println("This New BUG is Connecting with  Bug "+buginfo2.getBugId().getId()+"in the Table BugInfo~~~~~~~~~`");
-            */
+        Buginfo2 buginfo2 = new Buginfo2();
+        buginfo2.setBugId(bug);
+        buginfo2.setLifecount(bugInfo.getLifecount());
+        buginfo2Repository.save(buginfo2);
+        System.out.println("This New BUG is Connecting with  Bug "+buginfo2.getBugId().getId()+"in the Table BugInfo~~~~~~~~~`");
+
 
         bupt.ugrd.pojo.Content content = bugContent.getContent();
 
