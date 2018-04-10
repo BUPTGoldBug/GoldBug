@@ -18,6 +18,8 @@ import java.util.Date;
 @Component
 public class Scheduler {
 
+    private static final double MOVE_DIS = 0.00001;
+
     @Autowired
     private BuginfoRepository buginfoRepository;
 
@@ -26,7 +28,7 @@ public class Scheduler {
 
     @Scheduled(fixedRate = 5000)//每5秒执行一次
     public void play() throws Exception {
-        Integer status = -1;
+        Integer status = -2;
         double lon = 0, lat = 0;
         int lifecount;
         Buginfo bugId;
@@ -36,22 +38,28 @@ public class Scheduler {
         Iterable<Buginfo2> bugs = buginfo2Repository.findAll();
 
         for(Buginfo2 bug : bugs){
+            lifecount = bug.getLifecount(); // 模拟捉虫！！！！！！！！
             bugId = bug.getBugId();
             Integer id = bugId.getId();
 
             Buginfo buginfo = buginfoRepository.findOne(id);
 
-            lifecount = bug.getLifecount();
+            if(bug.getStatus() == -1){
+                lon = buginfo.getStart_lon();
+                lat = buginfo.getStart_lat();
+            }
+            else {
+                lon = bug.getLon();
+                lat = bug.getLat();
+            }
 
             Timestamp nowTime = new Timestamp(new Date().getTime());
             if(!buginfo.isMoved()){ // 虫子静止
-                lon = buginfo.getStart_lon();
-                lat = buginfo.getStart_lat();
 
                 // 现在开始可一直被捉
                 if(!buginfo.isIfNeedStartTime()){
                     if (lifecount > 0 && nowTime.before(buginfo.getDeathTime())){
-                        lifecount --; // 模拟捉虫！！！！！！
+                        //lifecount --; // 模拟捉虫！！！！！！
                         status = 0;
                     }
                     else {
@@ -65,22 +73,59 @@ public class Scheduler {
                     }
                     else {
                         if(nowTime.after(buginfo.getStartTime()) && nowTime.before(buginfo.getDeathTime()) && lifecount > 0){
+                            //lifecount--;
                             status = 0;
                         }
                         else if(nowTime.after(buginfo.getDeathTime()) || lifecount <= 0){
                             status = 2;
                         }
                         else
-                            status = -1;
+                            status = -2;
                     }
                 }
             }
             else { // 虫子移动
-                if(!buginfo.isIfNeedStartTime()){ // 现在开始可一直被捉
 
+                double e_lon = buginfo.getEnd_lon();
+                double e_lat = buginfo.getEnd_lat();
+                double line = Math.sqrt(Math.pow((e_lon-lon), 2) + Math.pow((e_lat-lat), 2));
+                double lon_dis = MOVE_DIS * Math.abs(e_lon - lon) / line;
+                double lat_dis = MOVE_DIS * Math.abs(e_lat - lat) / line;
+
+                if(!buginfo.isIfNeedStartTime()){ // 现在开始可一直被捉
+                    if (lifecount > 0 && nowTime.before(buginfo.getDeathTime())){
+
+                        if(e_lon > lon) lon += lon_dis;
+                        else lon -= lon_dis;
+                        if(e_lat > lat) lat += lat_dis;
+                        else lat -= lat_dis;
+                        lifecount --; // 模拟捉虫！！！！！！
+
+                        status = 0;
+                    }
+                    else {
+                        status = 2;
+                    }
                 }
                 else {
-
+                    if(nowTime.before(buginfo.getStartTime())){
+                        status = 1;
+                    }
+                    else {
+                        if(nowTime.after(buginfo.getStartTime()) && nowTime.before(buginfo.getDeathTime()) && lifecount > 0){
+                            lifecount--; // 模拟捉虫！！！！！！
+                            if(e_lon > lon) lon += lon_dis;
+                            else lon -= lon_dis;
+                            if(e_lat > lat) lat += lat_dis;
+                            else lat -= lat_dis;
+                            status = 0;
+                        }
+                        else if(nowTime.after(buginfo.getDeathTime()) || lifecount <= 0){
+                            status = 2;
+                        }
+                        else
+                            status = -2;
+                    }
                 }
 
             }
@@ -89,7 +134,6 @@ public class Scheduler {
             bug.setLon(lon);
             bug.setLat(lat);
             bug.setStatus(status);
-          //  newBug.setBugId(bugId);
             buginfo2Repository.save(bug);
 
         }

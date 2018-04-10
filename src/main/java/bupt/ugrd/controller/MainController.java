@@ -78,6 +78,7 @@ public class MainController {
         Buginfo2 buginfo2 = new Buginfo2();
         buginfo2.setBugId(bug);
         buginfo2.setLifecount(bugInfo.getLifecount());
+        buginfo2.setStatus(-1);
         buginfo2Repository.save(buginfo2);
         System.out.println("This New BUG is Connecting with  Bug "+buginfo2.getBugId().getId()+"in the Table BugInfo~~~~~~~~~`");
 
