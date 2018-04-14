@@ -8,7 +8,10 @@ import bupt.ugrd.model.*;
 import bupt.ugrd.pojo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 
 //@Controller
@@ -53,6 +56,23 @@ public class MainController {
         return null;
     }
 
+
+    @RequestMapping("getAroundBugs")
+    public @ResponseBody List<BugBasic> getAroundBugs(@RequestBody Coordinate userTmp){
+        List<BugBasic> bugList = new ArrayList<>();
+
+        Iterable<Buginfo2> bugs = buginfo2Repository.findAll();
+        for(Buginfo2 bug: bugs){
+            // 根据userTmp计算当前bug是否需要被加入到bugList中-----------TODO----------------
+            BugBasic bugBasic = new BugBasic();
+            bugBasic.setLon(bug.getLon());
+            bugBasic.setLat(bug.getLat());
+            bugBasic.setBugId(bug.getBugId().getId());
+            bugList.add(bugBasic);
+        }
+        return bugList;
+
+    }
 
 
     @RequestMapping("addGoldBug") //@RequestBody BugInfo bugInfo, @RequestBody Content content

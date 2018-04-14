@@ -9,7 +9,7 @@ import java.sql.Timestamp;
  * Created by Luyao on 2018/1/21.
  */
 public class BugInfo implements Serializable{
-    //
+
     @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     private Timestamp deathTime;
 

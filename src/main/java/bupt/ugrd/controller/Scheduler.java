@@ -18,7 +18,7 @@ import java.util.Date;
 @Component
 public class Scheduler {
 
-    private static final double MOVE_DIS = 0.00001;
+    private static final double MOVE_DIS = 0.00001; // 大约1米左右
 
     @Autowired
     private BuginfoRepository buginfoRepository;
