@@ -16,7 +16,7 @@ public class Buginfo2 {
     private Buginfo bugId;
 
     //status  0可捉   1即将显示(T<startTime)   2不能捉(lifecount == 0 || T>=deathTime)
-    // 特殊标志 -1 表示status从未被更新过的新记录  -2 表示
+    // 特殊标志 -1 表示status从未被更新过的新记录  -2 表示错误
     private Integer status;
 
     private double lon;

@@ -63,12 +63,15 @@ public class MainController {
 
         Iterable<Buginfo2> bugs = buginfo2Repository.findAll();
         for(Buginfo2 bug: bugs){
-            // 根据userTmp计算当前bug是否需要被加入到bugList中-----------TODO----------------
-            BugBasic bugBasic = new BugBasic();
-            bugBasic.setLon(bug.getLon());
-            bugBasic.setLat(bug.getLat());
-            bugBasic.setBugId(bug.getBugId().getId());
-            bugList.add(bugBasic);
+            if(bug.getStatus()==0 || bug.getStatus()==1){
+                // 根据userTmp计算当前bug是否需要被加入到bugList中-----------TODO----------------
+                BugBasic bugBasic = new BugBasic();
+                bugBasic.setLon(bug.getLon());
+                bugBasic.setLat(bug.getLat());
+                bugBasic.setBugId(bug.getBugId().getId());
+                bugList.add(bugBasic);
+            }
+
         }
         return bugList;
 

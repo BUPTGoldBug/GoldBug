@@ -99,7 +99,7 @@ public class Scheduler {
                         else lon -= lon_dis;
                         if(e_lat > lat) lat += lat_dis;
                         else lat -= lat_dis;
-                        lifecount --; // 模拟捉虫！！！！！！
+                        lifecount += 1; // 模拟捉虫！！！！！！
 
                         status = 0;
                     }
@@ -113,7 +113,7 @@ public class Scheduler {
                     }
                     else {
                         if(nowTime.after(buginfo.getStartTime()) && nowTime.before(buginfo.getDeathTime()) && lifecount > 0){
-                            lifecount--; // 模拟捉虫！！！！！！
+                            lifecount += 1; // 模拟捉虫！！！！！！
                             if(e_lon > lon) lon += lon_dis;
                             else lon -= lon_dis;
                             if(e_lat > lat) lat += lat_dis;
