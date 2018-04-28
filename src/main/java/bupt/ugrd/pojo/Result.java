@@ -10,6 +10,12 @@ public class Result implements Serializable{
     private String des;
     private int status;
 
+    public Result(){
+        this.isSuccess = false;
+        this.des = "";
+        this.status = 0;
+    }
+
     public Result(boolean isSuccess, String des, int status){
         this.isSuccess = isSuccess;
         this.des = des;

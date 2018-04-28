@@ -9,13 +9,15 @@ public class BugBasic implements Serializable {
     private double lon;
     private double lat;
     private Integer bugId;
+    private Integer arIndex;
 
     public BugBasic(){}
 
-    public BugBasic(double lon, double lat, Integer bugId){
+    public BugBasic(double lon, double lat, Integer bugId, Integer arIndex){
         this.lon = lon;
         this.lat = lat;
         this.bugId = bugId;
+        this.arIndex = arIndex;
     }
 
     public double getLon() {
@@ -40,5 +42,13 @@ public class BugBasic implements Serializable {
 
     public void setBugId(Integer bugId) {
         this.bugId = bugId;
+    }
+
+    public Integer getArIndex() {
+        return arIndex;
+    }
+
+    public void setArIndex(Integer arIndex) {
+        this.arIndex = arIndex;
     }
 }

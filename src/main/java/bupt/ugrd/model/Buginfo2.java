@@ -25,6 +25,8 @@ public class Buginfo2 {
 
     private int lifecount;
 
+    private Integer arIndex;
+
     //private double TTL;
 
     public Integer getId() {
@@ -73,6 +75,14 @@ public class Buginfo2 {
 
     public int getLifecount() {
         return lifecount;
+    }
+
+    public void setArIndex(Integer arIndex) {
+        this.arIndex = arIndex;
+    }
+
+    public Integer getArIndex() {
+        return arIndex;
     }
 
     /*

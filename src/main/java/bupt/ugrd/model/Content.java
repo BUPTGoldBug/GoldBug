@@ -11,10 +11,10 @@ import javax.persistence.Id;
 @Entity
 public class Content {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
-
+    //@GeneratedValue(strategy = GenerationType.AUTO)
+    //private Integer id;
     private Integer bugId;
+
     private Integer contentType;
     private String description;
     private String question;
@@ -25,13 +25,14 @@ public class Content {
     private String ans_4;
     private String key_;
 
+/*
     public void setId(Integer id) {
         this.id = id;
     }
 
     public Integer getId() {
         return id;
-    }
+    }*/
 
     public void setBugId(Integer bugId) {
         this.bugId = bugId;
@@ -112,4 +113,5 @@ public class Content {
     public void setKey_(String key_) {
         this.key_ = key_;
     }
+
 }
