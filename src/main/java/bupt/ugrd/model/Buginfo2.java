@@ -27,7 +27,6 @@ public class Buginfo2 {
 
     private Integer arIndex;
 
-    //private double TTL;
 
     public Integer getId() {
         return id;
@@ -85,12 +84,5 @@ public class Buginfo2 {
         return arIndex;
     }
 
-    /*
-    public double getTTL() {
-        return TTL;
-    }
 
-    public void setTTL(double TTL) {
-        this.TTL = TTL;
-    }*/
 }

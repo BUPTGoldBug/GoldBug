@@ -12,6 +12,7 @@ import java.sql.Timestamp;
 public class User implements Serializable{
     private String userPhone;
     private String userName;
+    private String password;
 
     @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     private Timestamp createTime;
@@ -38,5 +39,13 @@ public class User implements Serializable{
 
     public String getUserName() {
         return userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
