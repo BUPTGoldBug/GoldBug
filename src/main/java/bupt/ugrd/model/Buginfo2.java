@@ -27,6 +27,9 @@ public class Buginfo2 {
 
     private Integer arIndex;
 
+    // 标识审核结果的字段 -1等待审核  0审核成功，允许发布  1审核失败，不允许发布
+    private Integer resOfCheck;
+
 
     public Integer getId() {
         return id;
@@ -84,5 +87,11 @@ public class Buginfo2 {
         return arIndex;
     }
 
+    public void setResOfCheck(Integer resOfCheck) {
+        this.resOfCheck = resOfCheck;
+    }
 
+    public Integer getResOfCheck() {
+        return resOfCheck;
+    }
 }

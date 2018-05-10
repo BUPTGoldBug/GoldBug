@@ -62,24 +62,33 @@ public class GoldBugController {
         Buginfo2 bug = goldBugDaoImp.getBuginfo2ByBugId(bid);
         if(bug != null){
             double distTmp = Math.pow(bug.getLon()-common.getRt_lon(), 2)+Math.pow(bug.getLat()-common.getRt_lat(), 2);
-            if(distTmp > MIN_CATCH_DIST){
-                bugSpecOne.setDes("距离虫子再近点才能答题哦");
-                return bugSpecOne;
-            }
-            else {
+            if(common.getIsSuperUser() == 0){
                 arIndex = bug.getArIndex();
                 lifecount = bug.getLifecount();
             }
+            else {
+                if(distTmp > MIN_CATCH_DIST){
+                    bugSpecOne.setDes("距离虫子再近点才能答题哦");
+                    return bugSpecOne;
+                }
+                else {
+                    arIndex = bug.getArIndex();
+                    lifecount = bug.getLifecount();
+                }
+            }
+
         }
         else {
             bugSpecOne.setSuccess(false);
             return bugSpecOne;
         }
 
-        Debugrecord debugrecord = goldBugDaoImp.getDebugRecord(bid, userId);
-        if(debugrecord!=null && debugrecord.getState() == 0){
-            bugSpecOne.setDes("已经成功回答过啦");
-            return bugSpecOne;
+        if(common.getIsSuperUser() != 0){
+            Debugrecord debugrecord = goldBugDaoImp.getDebugRecord(bid, userId);
+            if(debugrecord!=null && debugrecord.getState() == 0){
+                bugSpecOne.setDes("已经成功回答过啦");
+                return bugSpecOne;
+            }
         }
 
         bugSpecOne.setArIndex(arIndex);
@@ -120,7 +129,7 @@ public class GoldBugController {
 
         if(buginfo2 != null){
             if(buginfo2.getStatus() == 1){
-                return new Result(false, "Wait for it to activate!", 1, false, null);
+                return new Result(false, "虫子还未到活跃时间点哦", 1, false, null);
             }
             else if(buginfo2.getStatus() == 0) {
                 record.setBugId(bid);
@@ -170,17 +179,17 @@ public class GoldBugController {
                     record.setState(state);
                     debugrecordRepository.save(record);
 
-                    return new Result(false, "answer validation failure", 1, false, null);
+                    return new Result(false, "回答错误，再想想哦", 1, false, null);
                 }
 
 
             }
             else {
-                return new Result(false, "GoldBug cannot be caught", 1, false, null);
+                return new Result(false, "捉虫失败", 1, false, null);
             }
         }
 
-        return new Result(false, "failure", 1, false, null);
+        return new Result(false, "虫子不存在哦", 1, false, null);
     }
 
 
@@ -210,6 +219,7 @@ public class GoldBugController {
         buginfo2.setBugId(bug);
         buginfo2.setLifecount(bugInfo.getLifecount());
         buginfo2.setStatus(-1);
+        buginfo2.setResOfCheck(-1);
         buginfo2.setArIndex(content.getArIndex());
         buginfo2Repository.save(buginfo2);
         System.out.println("This New BUG is Connecting with  Bug "+buginfo2.getBugId().getId()+"in the Table BugInfo~~~~~~~~~`");

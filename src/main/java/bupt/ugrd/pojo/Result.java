@@ -1,11 +1,15 @@
 package bupt.ugrd.pojo;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.io.Serializable;
 
 /**
  * Created by Luyao on 2018/1/21.
  */
 public class Result implements Serializable{
+
+    @JSONField(name = "success")
     private boolean isSuccess;
     private String des;
     private int status;

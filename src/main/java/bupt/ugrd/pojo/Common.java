@@ -11,10 +11,22 @@ public class Common {
     private  int userId;
     private double rt_lon;
     private double rt_lat;
+    private int isSuperUser = 1; // 0 为管理员
 
     @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     private Timestamp debugDate;
 
+    public Common(){}
+
+    public Common(int bid, int bugId, String choose, int userId, double rt_lon, double rt_lat, int isSuperUser){
+        this.bid = bid;
+        this.bugId = bugId;
+        this.choose = choose;
+        this.userId = userId;
+        this.rt_lon = rt_lon;
+        this.rt_lat = rt_lat;
+        this.isSuperUser = isSuperUser;
+    }
 
     public int getBugId() {
         return bugId;
@@ -70,5 +82,13 @@ public class Common {
 
     public void setRt_lon(double rt_lon) {
         this.rt_lon = rt_lon;
+    }
+
+    public int getIsSuperUser() {
+        return isSuperUser;
+    }
+
+    public void setIsSuperUser(int isSuperUser) {
+        this.isSuperUser = isSuperUser;
     }
 }

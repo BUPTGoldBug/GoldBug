@@ -94,9 +94,9 @@ public class UserController {
             userinfo2.setUserId(newUser.getId());
             userinfo2Repository.save(userinfo2);
 
-            return new Result(true, "success", 0, false, null);
+            return new Result(true, "欢迎加入GoldBug大家庭", 0, false, null);
         }
-        return new Result(false, "User Name Already Existed!", 1, false, null);
+        return new Result(false, "用户名已经存在啦", 1, false, null);
 
     }
 
