@@ -20,7 +20,7 @@ public interface GoldBugDao {
 
     Debugrecord getDebugRecord(int bugId, int userId);
 
-    List<BugBasic> getAroungBugs(double userLon, double userLat);
+    List<BugBasic> getAroungBugs(double userLon, double userLat, int userId);
 
     List<BugCheck> getBuginfoForCheck(int type);
 

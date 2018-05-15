@@ -11,13 +11,19 @@ public class BugBasic implements Serializable {
     private Integer bugId;
     private Integer arIndex;
 
+    /*  0在附近可以答题范围内&&未回答的active
+        1已经回答成功的light
+        2不在可答题范围内的&&未回答的non-active  */
+    private int type;
+
     public BugBasic(){}
 
-    public BugBasic(double lon, double lat, Integer bugId, Integer arIndex){
+    public BugBasic(double lon, double lat, Integer bugId, Integer arIndex, int type){
         this.lon = lon;
         this.lat = lat;
         this.bugId = bugId;
         this.arIndex = arIndex;
+        this.type = type;
     }
 
     public double getLon() {
@@ -50,5 +56,13 @@ public class BugBasic implements Serializable {
 
     public void setArIndex(Integer arIndex) {
         this.arIndex = arIndex;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 }

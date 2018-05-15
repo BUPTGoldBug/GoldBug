@@ -23,6 +23,8 @@ public class Debugrecord {
 
     private Integer state; // 用户捉虫结果 0 成功 1 失败
 
+    private String choice;
+
 
     public Integer getId() {
         return id;
@@ -62,5 +64,13 @@ public class Debugrecord {
 
     public void setState(Integer state) {
         this.state = state;
+    }
+
+    public String getChoice() {
+        return choice;
+    }
+
+    public void setChoice(String choice) {
+        this.choice = choice;
     }
 }

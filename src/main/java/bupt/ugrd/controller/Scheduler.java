@@ -40,6 +40,8 @@ public class Scheduler {
         for(Buginfo2 bug : bugs){
             lifecount = bug.getLifecount(); // 模拟捉虫！！！！！！！！
             bugId = bug.getBugId();
+
+            /*ERROR! 增加id为null时候的判断*/
             Integer id = bugId.getId();
 
             Buginfo buginfo = buginfoRepository.findOne(id);

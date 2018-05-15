@@ -13,6 +13,7 @@ public class BugSpecOne {
     private int lifecount;
     private double score;
     private String des;
+    private String key_;
 
     public BugSpecOne(){
         success = false;
@@ -82,5 +83,13 @@ public class BugSpecOne {
 
     public void setDes(String des) {
         this.des = des;
+    }
+
+    public void setKey_(String key_) {
+        this.key_ = key_;
+    }
+
+    public String getKey_() {
+        return key_;
     }
 }

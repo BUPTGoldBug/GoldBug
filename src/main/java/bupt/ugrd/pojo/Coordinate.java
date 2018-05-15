@@ -8,12 +8,14 @@ import java.io.Serializable;
 public class Coordinate implements Serializable {
     private double lon;
     private double lat;
+    private int userId;
 
     public Coordinate(){}
 
-    public Coordinate(double lon, double lat){
+    public Coordinate(double lon, double lat, int userId){
         this.lon = lon;
         this.lat = lat;
+        this.userId = userId;
     }
 
     public double getLon() {
@@ -30,5 +32,13 @@ public class Coordinate implements Serializable {
 
     public void setLat(double lat) {
         this.lat = lat;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }

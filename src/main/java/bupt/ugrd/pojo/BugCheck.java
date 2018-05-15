@@ -9,13 +9,15 @@ public class BugCheck implements Serializable {
     private int bugId;
     private int type;
     private String question;
+    private String key_;
 
     public BugCheck(){}
 
-    public BugCheck(int bugId, int type, String question){
+    public BugCheck(int bugId, int type, String question, String key_){
         this.bugId = bugId;
         this.type = type;
         this.question = question;
+        this.key_ = key_;
     }
 
     public void setBugId(int bugId) {
@@ -40,5 +42,13 @@ public class BugCheck implements Serializable {
 
     public String getQuestion() {
         return question;
+    }
+
+    public String getKey_() {
+        return key_;
+    }
+
+    public void setKey_(String key_) {
+        this.key_ = key_;
     }
 }
